@@ -55,11 +55,8 @@ public class JDBCTest {
 
         System.out.println("insane sort!!!!!\n" + sorted2 +"\n\n");
 
-        ArrayList<Employee> dl = new ArrayList<>();
-        for (Integer i : banan.keySet()){
-            dl.add(banan.get(i));
-        }
-        Collections.sort(dl, Comparator.comparing(Employee::getHiredate));
+        ArrayList<Employee> dl = new ArrayList<Employee>(banan.values());
+        Collections.sort(dl/*, Comparator.comparing(Employee::getHiredate)*/);
         System.out.println(dl);
 
 
