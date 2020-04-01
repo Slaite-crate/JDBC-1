@@ -8,9 +8,9 @@ public class JDBCTest {
 
     public static void main(String[]args) throws SQLException{
 
-        DatabaseConnectionManager DCM = new DatabaseConnectionManager();
+        DatabaseConnectionManager loginInfo = new DatabaseConnectionManager();
 
-        Connection tilSQL = DCM.getConnection();
+        Connection tilSQL = loginInfo.getConnection();
 
         Statement mitStatement = tilSQL.createStatement();
 
@@ -18,7 +18,7 @@ public class JDBCTest {
 
         ResultSet alledepart = mitStatement.executeQuery(getAllDepartments);
 
-        ResultSet rs = DCM.getConnection().createStatement().executeQuery("select * from dept");
+        ResultSet rs = loginInfo.getConnection().createStatement().executeQuery("select * from dept");
 
         ResultSetMetaData meta = alledepart.getMetaData();
         int columCount = meta.getColumnCount();
