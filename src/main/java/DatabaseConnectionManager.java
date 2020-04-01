@@ -19,9 +19,9 @@ public class DatabaseConnectionManager {
             String propFileName = "application.properties";
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
             poop.load(inputStream);
-            host = poop.getProperty("url");
-            username = poop.getProperty("user");
-            password = poop.getProperty("userpassword");
+            host = poop.getProperty("host");
+            username = poop.getProperty("username");
+            password = poop.getProperty("password");
         } catch (Exception ignored){
         }
 

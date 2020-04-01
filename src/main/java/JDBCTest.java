@@ -18,7 +18,7 @@ public class JDBCTest {
 
         ResultSet alledepart = mitStatement.executeQuery(getAllDepartments);
 
-        ResultSet rs = DCM.getConnection().createStatement().executeQuery("select * fraom dept");
+        ResultSet rs = DCM.getConnection().createStatement().executeQuery("select * from dept");
 
         ResultSetMetaData meta = alledepart.getMetaData();
         int columCount = meta.getColumnCount();
