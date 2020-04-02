@@ -16,11 +16,12 @@ public class JDBCTest {
     public static void jdbc2() throws SQLException {
         DatabaseConnectionManager loginInfo = new DatabaseConnectionManager();
         EmployeeDAO something = new EmployeeDAO(loginInfo.getConnection());
-        System.out.println(something.getAllEmployees());
-        System.out.println(something.getSingleEmployeeByID(7369));
-        EmployeeDTO emp = new EmployeeDTO(1235, "john", "funnyman", 321, Date.valueOf("2000-11-11"), 23, 34, 10);
-        something.setEmployee(emp);
+        EmployeeDTO emp = new EmployeeDTO(1234, "john", "funnyman", 321, Date.valueOf("2000-11-11"), 23, 34, 10);
+        something.insertEmployee(emp);
 
+        System.out.println(something.getAllEmployees() + "\n\n");
+
+        something.deleteEmployee(1234);
         System.out.println(something.getAllEmployees());
     }
 

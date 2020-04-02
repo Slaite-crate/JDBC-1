@@ -91,7 +91,7 @@ public class EmployeeDTO {
 
     @Override
     public String toString() {
-        return "EmployeeDTO{" +
+        return "\nEmployeeDTO{" +
                 "empno=" + empno +
                 ", ename='" + ename + '\'' +
                 ", job='" + job + '\'' +
@@ -100,6 +100,6 @@ public class EmployeeDTO {
                 ", sal=" + sal +
                 ", comm=" + comm +
                 ", deptno=" + deptno +
-                '}'+"\n";
+                "}\n";
     }
 }

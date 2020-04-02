@@ -60,7 +60,7 @@ public class EmployeeDAO {
         return EmployeeListe;
     }
 
-    public void setEmployee(EmployeeDTO emp) throws SQLException {
+    public void insertEmployee(EmployeeDTO emp) throws SQLException {
         String sql = "INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement statement = conn.prepareStatement(sql);
@@ -76,6 +76,36 @@ public class EmployeeDAO {
         int rowsInserted = statement.executeUpdate();
         if (rowsInserted > 0) {
             System.out.println("A new user was inserted successfully!");
+        }
+    }
+
+    public void updateEmployee(EmployeeDTO emp) throws SQLException {
+        String sql = "update emp set empno=?, ename=?, job=?, mgr=?, hiredate=?, sal=?, comm=?, deptno=? where empno=?";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1, emp.getEmpno());
+        statement.setString(2, emp.getEname());
+        statement.setString(3, emp.getJob());
+        statement.setInt(4, emp.getMgr());
+        statement.setDate(5, emp.getHiredate());
+        statement.setInt(6, emp.getSal());
+        statement.setInt(7, emp.getComm());
+        statement.setInt(8, emp.getDeptno());
+        statement.setInt(9, emp.getEmpno());
+
+        int rowsInserted = statement.executeUpdate();
+        if (rowsInserted > 0) {
+            System.out.println("A new user was updated successfully!");
+        }
+    }
+
+    public void deleteEmployee(int employeeNumber) throws SQLException {
+        String sql = "delete from emp where empno=?";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1, employeeNumber);
+
+        int rowsDeleted = statement.executeUpdate();
+        if (rowsDeleted > 0) {
+            System.out.println("A user was deleted successfully!");
         }
     }
 }
