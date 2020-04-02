@@ -53,6 +53,8 @@ public class JDBCTest {
                         LinkedHashMap::new)
                 );
 
+        System.out.println("\n" + banan + "\n");
+
         System.out.println("insane sort!!!!!\n" + sorted2 +"\n\n");
 
         ArrayList<Employee> dl = new ArrayList<Employee>(banan.values());
