@@ -1,75 +1,93 @@
 import java.sql.*;
 import java.util.*;
+import java.sql.Date;
 
 import static java.util.stream.Collectors.toMap;
 import static java.util.Map.Entry.*;
 
 public class JDBCTest {
 
-    public static void main(String[]args) throws SQLException{
+    public static void main(String[]args) throws SQLException {
+        //jdbc1();
+        jdbc2();
 
+    }
+
+    public static void jdbc2() throws SQLException {
         DatabaseConnectionManager loginInfo = new DatabaseConnectionManager();
+        EmployeeDAO something = new EmployeeDAO(loginInfo.getConnection());
+        System.out.println(something.getAllEmployees());
+        System.out.println(something.getSingleEmployeeByID(7369));
+        EmployeeDTO emp = new EmployeeDTO(1235, "john", "funnyman", 321, Date.valueOf("2000-11-11"), 23, 34, 10);
+        something.setEmployee(emp);
 
-        Connection tilSQL = loginInfo.getConnection();
+        System.out.println(something.getAllEmployees());
+    }
 
-        Statement mitStatement = tilSQL.createStatement();
+    public static void jdbc1() throws SQLException {
 
-        String getAllDepartments = "select * from dept";
+            DatabaseConnectionManager loginInfo = new DatabaseConnectionManager();
 
-        ResultSet alledepart = mitStatement.executeQuery(getAllDepartments);
+            Connection tilSQL = loginInfo.getConnection();
 
-        ResultSet rs = loginInfo.getConnection().createStatement().executeQuery("select * from dept");
+            Statement mitStatement = tilSQL.createStatement();
 
-        ResultSetMetaData meta = alledepart.getMetaData();
-        int columCount = meta.getColumnCount();
+            String getAllDepartments = "select * from dept";
 
-        for (int i = 1; i <= columCount; i++){
-            System.out.print(meta.getColumnName(i) + " ");
-        }
+            ResultSet alledepart = mitStatement.executeQuery(getAllDepartments);
 
-        System.out.println();
+            ResultSet rs = loginInfo.getConnection().createStatement().executeQuery("select * from dept");
 
-        while(alledepart.next()){
-            System.out.println(alledepart.getInt("deptno") + " " + alledepart.getString("dname") + " " + alledepart.getString("loc"));
+            ResultSetMetaData meta = alledepart.getMetaData();
+            int columCount = meta.getColumnCount();
 
-        }
+            for (int i = 1; i <= columCount; i++){
+                System.out.print(meta.getColumnName(i) + " ");
+            }
 
+            System.out.println();
 
-        System.out.println("\n");
+            while(alledepart.next()){
+                System.out.println(alledepart.getInt("deptno") + " " + alledepart.getString("dname") + " " + alledepart.getString("loc"));
 
-
-        Map<Integer, Employee> banan;
-        Employee ep = new Employee();
-        banan = ep.getAllEmployees();
-
-        Map<Integer, Employee> sorted2 = banan
-                .entrySet()
-                .stream()
-                .sorted(comparingByValue())
-                .collect(
-                        toMap(e -> e.getKey(),
-                        e -> e.getValue(),
-                        (e1, e2) -> e2,
-                        LinkedHashMap::new)
-                );
-
-        System.out.println("\n" + banan + "\n");
-
-        System.out.println("insane sort!!!!!\n" + sorted2 +"\n\n");
-
-        ArrayList<Employee> dl = new ArrayList<Employee>(banan.values());
-        Collections.sort(dl/*, Comparator.comparing(Employee::getHiredate)*/);
-        System.out.println(dl);
+            }
 
 
-        System.out.println("\n");
+            System.out.println("\n");
 
 
-        DepartmentManager dp = new DepartmentManager();
-        Set etSet = dp.getSetOfDepartments();
-        Iterator<Department> iSet = etSet.iterator();
-        while (iSet.hasNext()){
-            System.out.println(iSet.next());
-        }
+            Map<Integer, Employee> banan;
+            Employee ep = new Employee();
+            banan = ep.getAllEmployees();
+
+            Map<Integer, Employee> sorted2 = banan
+                    .entrySet()
+                    .stream()
+                    .sorted(comparingByValue())
+                    .collect(
+                            toMap(e -> e.getKey(),
+                                    e -> e.getValue(),
+                                    (e1, e2) -> e2,
+                                    LinkedHashMap::new)
+                    );
+
+            System.out.println("\n" + banan + "\n");
+
+            System.out.println("insane sort!!!!!\n" + sorted2 +"\n\n");
+
+            ArrayList<Employee> dl = new ArrayList<Employee>(banan.values());
+            Collections.sort(dl/*, Comparator.comparing(Employee::getHiredate)*/);
+            System.out.println(dl);
+
+
+            System.out.println("\n");
+
+
+            DepartmentManager dp = new DepartmentManager();
+            Set etSet = dp.getSetOfDepartments();
+            Iterator<Department> iSet = etSet.iterator();
+            while (iSet.hasNext()){
+                System.out.println(iSet.next());
+            }
     }
 }
