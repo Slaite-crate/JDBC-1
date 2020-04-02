@@ -1,7 +1,5 @@
-import java.io.InputStream;
 import java.sql.*;
 import java.util.HashSet;
-import java.util.Properties;
 import java.util.Set;
 
 public class DepartmentManager {
